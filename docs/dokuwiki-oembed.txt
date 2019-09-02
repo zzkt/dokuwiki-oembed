@@ -1,0 +1,38 @@
+====== OEmbed Plugin ======
+
+https://www.dokuwiki.org/plugin:oembed
+
+Plugin to embed media from oEmbed providers.
+
+Tagged with embed, images, media, music, video
+
+By Dwayne Bent, nik gaffney
+
+The oEmbed plugin allows you to easily embed media from any provider that supports the [[https://oembed.com/|oEmbed]] format.
+
+===== Download =====
+
+Availbale at https://github.com/zzkt/dokuwiki-oembed/
+
+===== Syntax =====
+
+The simplest way to embed media is with the url ''%%{{>http://example.com/}}%%''
+
+Some providers can be given extra options in the form ''%%{{>url?options}}%%'' such as ''%%maxwidth%%'' or ''%%maxheight%%''
+
+Embed a single photo from Flickr ''%%{{>http://www.flickr.com/photos/foam/41018347952}}%%'' or with a maximum width ''%%{{>http://www.flickr.com/photos/foam/41018347952?maxwidth=800}}%%'' or a gallery… ''%%{{>http://www.flickr.com/photos/flickr/galleries/72157667259442778/}}%%''
+
+An oembed provider will specify a URL scheme and API endpoint pairs. If you know the endpoint you can also use the ''%%!direct%%'' keyword to send paramaters to the API endpoint
+
+e.g. ''%%{{>http://www.flickr.com/services/oembed/ !direct ?url=http://www.flickr.com/photos/sdasmarchives/5018415361/}}%%''
+
+===== Further =====
+
+A list of oembed providers can be found on the [[https://oembed.com/|oEmbed website]] and [[https://noembed.com/|Noembed]] can provide a consitent inferface for supported and unsupoprted site.
+
+===== Known issues =====
+
+The current plugin (as of 2019) has been updated from an old unmaintained version but doesn't use the new plugin skeleton and may not be fully compatible with current/future versions of dokuwiki.
+
+  * can't resolve https urls for some providers
+

@@ -1,30 +1,55 @@
-====== OEmbed Plugin ======
+====== oEmbed Plugin ======
 
-https://www.dokuwiki.org/plugin:oembed
+---- plugin ----
+description: Easily embed media from OEmbed providers.
+author     : Dwayne Bent, nik gaffney
+email      : nik@fo.am
+type       : syntax
+lastupdate : 2019-09-01
+compatible : Greebo
+depends    : 
+conflicts  : 
+similar    : 
+tags       : media, images, video, music, embed
 
-Plugin to embed media from oEmbed providers.
+downloadurl: https://github.com/zzkt/dokuwiki-oembed/zipball/master
+sourcerepo : https://github.com/zzkt/dokuwiki-oembed/
+bugtracker : https://github.com/zzkt/dokuwiki-oembed/issues
+donationurl: https://www.sarcoma.org.au/donations
 
-Tagged with embed, images, media, music, video
-
-By Dwayne Bent, nik gaffney
+----
 
 The oEmbed plugin allows you to easily embed media from any provider that supports the [[https://oembed.com/|oEmbed]] format.
 
-===== Download =====
+===== Install =====
 
-Availbale at https://github.com/zzkt/dokuwiki-oembed/
+Search for and install the plugin using the [[plugin:extension|Extension Manager]]. Refer to :Plugins on how to install plugins manually.
 
 ===== Syntax =====
 
-The simplest way to embed media is with the url ''%%{{>http://example.com/}}%%''
+The simplest way to embed media is with its url. e.g. ''%%{{>http://example.com/}}%%''
 
 Some providers can be given extra options in the form ''%%{{>url?options}}%%'' such as ''%%maxwidth%%'' or ''%%maxheight%%''
 
-Embed a single photo from Flickr ''%%{{>http://www.flickr.com/photos/foam/41018347952}}%%'' or with a maximum width ''%%{{>http://www.flickr.com/photos/foam/41018347952?maxwidth=800}}%%'' or a gallery… ''%%{{>http://www.flickr.com/photos/flickr/galleries/72157667259442778/}}%%''
-
 An oembed provider will specify a URL scheme and API endpoint pairs. If you know the endpoint you can also use the ''%%!direct%%'' keyword to send paramaters to the API endpoint
 
-e.g. ''%%{{>http://www.flickr.com/services/oembed/ !direct ?url=http://www.flickr.com/photos/sdasmarchives/5018415361/}}%%''
+===== Examples =====
+
+Embed a single image from Flickr
+
+''%%{{>http://www.flickr.com/photos/foam/41018347952}}~%%''
+
+embed an image with a maximum width of 800px
+
+''%%{{>http://www.flickr.com/photos/foam/41018347952?maxwidth=800}}~%%''
+
+embed a gallery
+
+''%%{{>http://www.flickr.com/photos/flickr/galleries/72157667259442778/}}~%%''
+
+use the API endpoint directly
+
+''%%{{>http://www.flickr.com/services/oembed/ !direct ?url=http://www.flickr.com/photos/sdasmarchives/5018415361/}}%%''
 
 ===== Further =====
 

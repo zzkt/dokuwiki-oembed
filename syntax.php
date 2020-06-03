@@ -14,8 +14,7 @@ if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../')
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 define('OEMBED_BASE',DOKU_PLUGIN.'oembed/');
 require_once(DOKU_PLUGIN.'syntax.php');
-require_once(DOKU_INC.'inc/HTTPClient.php');
-require_once(DOKU_INC.'inc/JSON.php');
+require_once(DOKU_INC.'inc/HTTP/HTTPClient.php');
 
 class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
     var $errors       = array();
@@ -148,8 +147,7 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
 
                 break;
             case 'json':
-                $json = new JSON(JSON_LOOSE_TYPE);
-                $oembed = $json->decode($response['body']);
+                $oembed = json_decode($response['body']);
 
                 break;
             default:

@@ -154,7 +154,7 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
                 return $this->error("Internal error occured. Found type: {$type}");
         }
 
-        if($oembed['version'] != '1.0') return $this->error("Unsupported OEmbed version: {$oembed['vesrion']}");
+        //if($oembed['version'] != '1.0') return $this->error("Unsupported OEmbed version: {$oembed['version']}");
         return $oembed;
     }
 

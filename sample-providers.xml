@@ -1,12 +1,12 @@
 <!--
     Provider List
         for DokuWiki OEmbed plugin
-    
+
     Important:
         Due to the risk of a cross-site scripting attack
         [http://en.wikipedia.org/wiki/Cross-site_scripting] only list providers
         that you trust. Remove any providers that you do not trust.
-    
+
     Usage:
         Each provider element has two attributes: name, which is currently not
         used and api which is the API endpoint for the provider's OEmbed
@@ -15,7 +15,7 @@
         The regular expressions are matched agains the entire URL (no need for
         '^$') and case insensitively. The schemes listed on oembed.com are not
         valid regular expressions and need to be converted.
-        
+
         Providers listed under PROXY PROVIDERS are not content providers but
         instead act as intermediaries for providers that may or may not natively
         support OEmbed.
@@ -27,96 +27,96 @@
     <provider name="Flickr" api="http://www.flickr.com/services/oembed/">
         <scheme>http://(.*?\.)?flickr\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Viddler -->
     <provider name="Viddler" api="http://lab.viddler.com/services/oembed/">
         <scheme>http://.*?\.viddler\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Qik -->
     <provider name="Qik" api="http://qik.com/api/oembed.{format}">
         <scheme>http://qik\.com/video/.*?</scheme>
         <scheme>http://qik\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Pownce -->
     <provider name="Pownce" api="http://api.pownce.com/2.1/oembed.{format}">
         <scheme>http://(.*?\.)?pownce\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Revision3 -->
     <provider name="Revision3" api="http://revision3.com/api/oembed/">
         <scheme>http://(.*?\.)?revision3\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Hulu -->
     <provider name="Hulu" api="http://www.hulu.com/api/oembed.{format}">
         <scheme>http://www\.hulu\.com/watch/.*?</scheme>
     </provider>
-    
+
     <!-- Vimeo -->
     <provider name="Vimeo" api="http://www.vimeo.com/api/oembed.{format}">
         <scheme>http://www\.vimeo\.com/.*?</scheme>
         <scheme>http://www\.vimeo\.com/groups/.*?/.*?</scheme>
     </provider>
-    
+
     <!-- PROXY PROVIDERS -->
 
     <!-- oohEmbed is no longer active as of 2019  -->
     <provider name="oohEmbed" api="http://oohembed.com/oohembed/">
         <!-- Amazon Product Image -->
         <scheme>http://.*?\.amazon\.(com|co\.uk|de|ca|jp)/(gp/product|o/ASIN|obidos/ASIN|dp)/.*?</scheme>
-        
+
         <!-- CollegeHumor Video -->
         <scheme>http://.*?\.collegehumor\.com/video:.*?</scheme>
-        
+
         <!-- Flickr (proxy to native service) -->
         <scheme>http://(.*?\.)?flickr\.com/photos/.*?</scheme>
-        
+
         <!-- Funny or Die Video -->
         <scheme>http://.*?\.funnyordie.com/videos/.*?</scheme>
-        
+
         <!-- Google Video -->
         <scheme>http://video\.google\.com/videoplay\?.*?</scheme>
-        
+
         <!-- Hulu (proxy to native service) -->
         <scheme>http://www\.hulu\.com/watch/.*?</scheme>
-        
+
         <!-- IMDb -->
         <scheme>http://.*?\.imdb\.com/title/tt.*?/</scheme>
-        
+
         <!-- Metacafe -->
         <scheme>http://.*?\.metacafe\.com/watch/.*?</scheme>
-        
+
         <!-- Pownce (proxy to native service) -->
         <scheme>http://(.*?\.)?pownce\.com/.*?/notes/.*?</scheme>
-        
+
         <!-- Qik (proxy to native service) -->
         <scheme>http://qik\.com/.*?</scheme>
-        
+
         <!-- Revision3 (proxy to native service) -->
         <scheme>http://(.*?\.)?revision3\.com/.*?</scheme>
-        
+
         <!-- SlideShare -->
         <scheme>http://.*?\.slideshare\.net/.*?</scheme>
-        
+
         <!-- Twitter Status -->
         <scheme>http://twitter\.com/.*?/statuses/.*?</scheme>
-        
+
         <!-- Viddler Video (proxy to native service) -->
         <scheme>http://.*?\.viddler\.com/explore/.*?</scheme>
-        
+
         <!-- Vimeo (proxy to native service) -->
         <scheme>http://www\.vimeo\.com/.*?</scheme>
         <scheme>http://www\.vimeo\.com/groups/.*?/.*?</scheme>
-        
+
         <!-- Wikipedia -->
         <scheme>http://.*?\.wikipedia\.org/wiki/.*?</scheme>
-        
+
         <!-- Wordpress.com -->
         <scheme>http://.*?\.wordpress\.com/\d{4}/\d{2}/\d{2}/.*?</scheme>
-        
+
         <!-- Youtube -->
-        <scheme>http://(.*?\.)?youtube\.com/watch.*?</scheme>        
+        <scheme>http://(.*?\.)?youtube\.com/watch.*?</scheme>
     </provider>
 </providers>

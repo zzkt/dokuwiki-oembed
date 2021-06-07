@@ -6,7 +6,7 @@
         Due to the risk of a cross-site scripting attack
         [http://en.wikipedia.org/wiki/Cross-site_scripting] only list providers
         that you trust. Remove any providers that you do not trust.
-    
+
     Usage:
         Each provider element has two attributes: name, which is currently not
         used and api which is the API endpoint for the provider's OEmbed
@@ -15,7 +15,7 @@
         The regular expressions are matched agains the entire URL (no need for
         '^$') and case insensitively. The schemes listed on oembed.com are not
         valid regular expressions and need to be converted.
-        
+
         Providers listed under PROXY PROVIDERS are not content providers but
         instead act as intermediaries for providers that may or may not natively
         support OEmbed.
@@ -25,17 +25,17 @@
     <!-- DIRECT PROVIDERS -->
     <!-- Flickr -->
     <provider name="Flickr" api="http://www.flickr.com/services/oembed.xml">
-        <scheme>http://(.*?\.)?flickr\.com/.*?</scheme>
+        <scheme>https?://(.*?\.)?flickr\.com/.*?</scheme>
     </provider>
-    
+
     <!-- Vimeo -->
     <provider name="Vimeo" api="http://www.vimeo.com/api/oembed.{format}">
-        <scheme>http://www\.vimeo\.com/.*?</scheme>
-        <scheme>http://www\.vimeo\.com/groups/.*?/.*?</scheme>
+        <scheme>https?://www\.vimeo\.com/.*?</scheme>
+        <scheme>https?://www\.vimeo\.com/groups/.*?/.*?</scheme>
     </provider>
-    
+
     <!-- PROXY PROVIDERS -->
 
     <!-- oohEmbed is no longer active as of 2019  -->
-    
+
 </providers>

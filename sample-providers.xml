@@ -1,6 +1,6 @@
 <!--
     Provider List
-        for DokuWiki OEmbed plugin
+        for the DokuWiki oEmbed plugin
 
     Important:
         Due to the risk of a cross-site scripting attack
@@ -18,7 +18,10 @@
 
         Providers listed under PROXY PROVIDERS are not content providers but
         instead act as intermediaries for providers that may or may not natively
-        support OEmbed.
+        support oEmbed.
+
+	A more detailed list of providers can be found on the oEmbed site
+	https://oembed.com/providers.json
 -->
 
 <providers>

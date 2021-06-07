@@ -1,6 +1,6 @@
 <!--
     Provider List
-        for DokuWiki OEmbed plugin
+        for the DokuWiki OEmbed plugin.
 
     Important:
         Due to the risk of a cross-site scripting attack
@@ -16,9 +16,10 @@
         '^$') and case insensitively. The schemes listed on oembed.com are not
         valid regular expressions and need to be converted.
 
-        Providers listed under PROXY PROVIDERS are not content providers but
-        instead act as intermediaries for providers that may or may not natively
-        support OEmbed.
+        Additional providers can be found in the sample-providers.xml file and
+        a more detailed list of providers can be found on the oembed site
+        https://oembed.com/providers.json
+
 -->
 
 <providers>
@@ -34,8 +35,15 @@
         <scheme>https?://www\.vimeo\.com/groups/.*?/.*?</scheme>
     </provider>
 
+    <!-- Youtube -->
+    <provider name="Youtube" api="https://www.youtube.com/oembed">
+        <scheme>https?://(.*?\.)?youtube\.com/watch.*?</scheme>
+        <scheme>https?://(.*?\.)?youtube\.com/v/.*?</scheme>
+        <scheme>https?://youtu\.be/.*?</scheme>
+        <scheme>https?://(.*?\.)?youtube\.com/playlist?list=.*?</scheme>
+   </provider>
+
     <!-- PROXY PROVIDERS -->
 
-    <!-- oohEmbed is no longer active as of 2019  -->
 
 </providers>

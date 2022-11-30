@@ -103,9 +103,6 @@
         <!-- SlideShare -->
         <scheme>http://.*?\.slideshare\.net/.*?</scheme>
 
-        <!-- Twitter Status -->
-        <scheme>http://twitter\.com/.*?/statuses/.*?</scheme>
-
         <!-- Viddler Video (proxy to native service) -->
         <scheme>http://.*?\.viddler\.com/explore/.*?</scheme>
 

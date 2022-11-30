@@ -29,6 +29,12 @@
         <scheme>https?://(.*?\.)?flickr\.com/.*?</scheme>
     </provider>
 
+    <!-- Twitter -->
+    <provider name="Twitter" api="https://publish.twitter.com/oembed">
+        <scheme>https?://twitter\.com/.*?</scheme>
+        <scheme>https?://www\.twitter\.com/.*?</scheme>
+    </provider>
+
     <!-- Vimeo -->
     <provider name="Vimeo" api="http://www.vimeo.com/api/oembed.{format}">
         <scheme>https?://www\.vimeo\.com/.*?</scheme>

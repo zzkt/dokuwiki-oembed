@@ -1,16 +1,16 @@
-oEmbed Plugin for DokuWiki
+oembed plugin for DokuWiki
 
-embed media from oEmbed providers
+ Embed media from oEmbed providers
 
 All documentation for this plugin can be found at
-https://github.com/zzkt/dokuwiki-oembed
+https://codeberg.org/zzkt/dokuwiki-oembed
 
 If you install this plugin manually, make sure it is installed in
-lib/plugins/oembed/ - if the folder is named differently it
+lib/plugins/oembed/ - if the folder is called different it
 will not work!
 
-Please refer to http://www.dokuwiki.org/plugins for additional info
-on how to install plugins in DokuWiki.
+Please refer to http://www.dokuwiki.org/extensions for additional info
+on how to install extensions in DokuWiki.
 
 ----
 Copyright (C) FoAM oü

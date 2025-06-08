@@ -26,30 +26,34 @@
     <!-- DIRECT PROVIDERS -->
     <!-- Flickr -->
     <provider name="Flickr" api="http://www.flickr.com/services/oembed.xml">
-        <scheme>https?://(.*?\.)?flickr\.com/.*?</scheme>
-    </provider>
-
-    <!-- Twitter -->
-    <provider name="Twitter" api="https://publish.twitter.com/oembed">
-        <scheme>https?://twitter\.com/.*?</scheme>
-        <scheme>https?://www\.twitter\.com/.*?</scheme>
+      <scheme>https?://(.*?\.)?flickr\.com/.*?</scheme>
     </provider>
 
     <!-- Vimeo -->
     <provider name="Vimeo" api="http://www.vimeo.com/api/oembed.{format}">
-        <scheme>https?://www\.vimeo\.com/.*?</scheme>
-        <scheme>https?://www\.vimeo\.com/groups/.*?/.*?</scheme>
+      <scheme>https?://www\.vimeo\.com/.*?</scheme>
+      <scheme>https?://www\.vimeo\.com/groups/.*?/.*?</scheme>
     </provider>
 
     <!-- Youtube -->
     <provider name="Youtube" api="https://www.youtube.com/oembed">
-        <scheme>https?://(.*?\.)?youtube\.com/watch.*?</scheme>
-        <scheme>https?://(.*?\.)?youtube\.com/v/.*?</scheme>
-        <scheme>https?://youtu\.be/.*?</scheme>
-        <scheme>https?://(.*?\.)?youtube\.com/playlist?list=.*?</scheme>
-   </provider>
+      <scheme>https?://(.*?\.)?youtube\.com/watch.*?</scheme>
+      <scheme>https?://(.*?\.)?youtube\.com/v/.*?</scheme>
+      <scheme>https?://youtu\.be/.*?</scheme>
+      <scheme>https?://(.*?\.)?youtube\.com/playlist?list=.*?</scheme>
+    </provider>
+
+   <!-- Peertube -->
+    <provider name="Peertube" api="https://peertube.tv/services/oembed">
+      <scheme>https?://peertube\.tv/w/*?</scheme>
+    </provider>
+
+    <!-- hearthis -->
+    <provider name="hearthis" api="https://hearthis.at/oembed/?format=json">
+      <scheme>https?://hearthis\.at/*?./set/.*?</scheme>
+      <scheme>https?://hearthis\.at/*?./.*?/.*?</scheme>
+    </provider>
 
     <!-- PROXY PROVIDERS -->
-
 
 </providers>

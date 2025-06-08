@@ -1,47 +1,66 @@
 <?php
+
+use dokuwiki\Extension\SyntaxPlugin;
+use dokuwiki\HTTP\DokuHTTPClient;
+
 /**
- *  OEMBED PLUGIN 
- * 
+ * DokuWiki Plugin oembed (Syntax Component)
+ *
+ * @license GPL 2 http://www.gnu.org/licenses/gpl-2.0.html
+ * @author nik gaffney <nik@fo.am>
+ *
  *  Version history
- *    2008-07-31 - release v0.6 by Dwayne Bent <dbb.pub0@liqd.org>
- *    2019-09-01 - resuscitation & realignment with "Greebo" 
+ *   - 2008-07-31 - release v0.6 by Dwayne Bent <dbb.pub0@liqd.org>
+ *   - 2019-09-01 - resuscitation & realignment with "Greebo"
+ *   - 2025-05-25 - rewrite for "Kaos" & "Librarian" compatibilty
  *
- *  Licensed under the GPL 2 [http://www.gnu.org/licenses/gpl.html]
- *
- **/
+ */
+
+// path on server filesystem
 
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
 define('OEMBED_BASE',DOKU_PLUGIN.'oembed/');
-require_once(DOKU_PLUGIN.'syntax.php');
-require_once(DOKU_INC.'inc/HTTP/HTTPClient.php');
 
-class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
+class syntax_plugin_oembed extends SyntaxPlugin
+{
     var $errors       = array();
     var $version      = '1.0';
     var $regex_master = '/^{{>\s*(?<url>.+?)(?:\s+(?<params>.+?))??\s*}}$/';
 
-    function getType(){
+    /** @inheritDoc */
+    public function getType()
+    {
         return 'substition';
     }
 
-    function getAllowedTypes() {
-        return array();
-    }
-
-    function getPType(){
+    /** @inheritDoc */
+    public function getPType()
+    {
         return 'block';
     }
 
-    function getSort(){
+    /** @inheritDoc */
+    public function getSort()
+    {
         return 285;
     }
 
-    function connectTo($mode) {
+    /** @inheritDoc */
+    public function connectTo($mode)
+    {
         $this->Lexer->addSpecialPattern('{{>.+?}}', $mode, 'plugin_oembed');
     }
 
-    function handle($match, $state, $pos, Doku_Handler $handler){
+    //    /** @inheritDoc */
+    //    public function postConnect()
+    //    {
+    //        $this->Lexer->addExitPattern('</FIXME>', 'plugin_oembed');
+    //    }
+
+    /** @inheritDoc */
+    public function handle($match, $state, $pos, Doku_Handler $handler)
+    {
         if($state == DOKU_LEXER_SPECIAL){
             if($parsed_tag = $this->parseTag($match)){
                 $oembed_data = $this->resolve($parsed_tag);
@@ -50,16 +69,16 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
                              'errors'      => $this->errors);
             }
         }
-        
         return false;
     }
 
-    function render($mode, Doku_Renderer $renderer, $data) {
-        if($mode == 'xhtml'){
-            $renderer->doc .= $this->renderXHTML($data);
+    /** @inheritDoc */
+    public function render($mode, Doku_Renderer $renderer, $data)
+    {
+        if ($mode !== 'xhtml') {
+            return false;
         }
-
-        return false;
+        $renderer->doc .= $this->renderXHTML($data);
     }
 
     /***************************************************************************
@@ -138,20 +157,20 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
         $oembed = array();
 
         switch($type){
-            case 'xml':
-                if(!$xml = simplexml_load_string($response['body'])) return $this->error("Unable to parse XML: {$response['body']}");
+        case 'xml':
+            if(!$xml = simplexml_load_string($response['body'])) return $this->error("Unable to parse XML: {$response['body']}");
 
-                foreach($xml as $element){
-                    $oembed[$element->getName()] = (string) $element;
-                }
+            foreach($xml as $element){
+                $oembed[$element->getName()] = (string) $element;
+            }
 
-                break;
-            case 'json':
-                $oembed = json_decode($response['body']);
+            break;
+        case 'json':
+            $oembed = json_decode($response['body']);
 
-                break;
-            default:
-                return $this->error("Internal error occured. Found type: {$type}");
+            break;
+        default:
+            return $this->error("Internal error occured. Found type: {$type}");
         }
 
         //if($oembed['version'] != '1.0') return $this->error("Unsupported OEmbed version: {$oembed['version']}");
@@ -171,26 +190,21 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
         }
 
         switch($matches['type']){
-            case 'text/xml':
-                return 'xml';
-            case 'application/json':
-                return 'json';
+        case 'text/xml':
+            return 'xml';
+        case 'application/json':
+            return 'json';
             // non-spec content-types, only supported for compatibility
-            case 'application/xml':
-                return 'xml';
-            case 'text/json':
-                return 'json';
-            case 'text/plain':
-                return 'json';
-            default:
-                return $this->error("Unsupported Content-Type: {$matches['type']}");
+        case 'application/xml':
+            return 'xml';
+        case 'text/json':
+            return 'json';
+        case 'text/plain':
+            return 'json';
+        default:
+            return $this->error("Unsupported Content-Type: {$matches['type']}");
         }
     }
-
-    /***************************************************************************
-     * RESOLVE FUNCTIONS
-     *     Given parsed tag data get OEmbed data
-     **************************************************************************/
 
     /*
      * Given parsed tag information, return OEmbed data
@@ -219,7 +233,6 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
             if($this->getConf('enable_link_discovery')){
                 if($data = $this->resolveDiscovery($tag)) return $data;
             }
-
             // try local provider list
             if($this->getConf('enable_provider_list')){
                 if($data = $this->resolveProviderList($tag)) return $data;
@@ -230,7 +243,6 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
             if($this->getConf('enable_provider_list')){
                 if($data = $this->resolveProviderList($tag)) return $data;
             }
-
             // try link discovery
             if($this->getConf('enable_link_discovery')){
                 if($data = $this->resolveDiscovery($tag)) return $data;
@@ -264,7 +276,6 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
      * Analogous to resolve(), using link discovery for resolution
      */
     function resolveDiscovery($tag){
-        
         if(!$response = $this->fetch($tag['url'])) return false;
         if(!$link_url = $this->getOEmbedLink($response['body'])) return false;
 
@@ -273,8 +284,6 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
         if(!$response = $this->fetch($query_url)) return false;
         if(!$oembed = $this->parseResponse($response)) return false;
 
-
- 
         return array('oembed'     => $oembed,
                      'query_url'  => $query_url,
                      'target_url' => $tag['url']);
@@ -298,11 +307,6 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
                      'target_url' => $tag['url']);
     }
 
-    /***************************************************************************
-     * RENDER FUNCTIONS
-     *     Convert OEmbed data to a presentable form
-     **************************************************************************/
-
     /*
      * Given OEmbed data as returned by resolve(), produces a valid XHTML
      * representation
@@ -311,7 +315,8 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
      *
      * returns: XHTML representation of OEmbed data
      */
-    function renderXHTML($data){
+
+        function renderXHTML($data){
         $content = '';
 
         if(!$data['oembed_data']){
@@ -326,7 +331,7 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
         }
 
         $oembed = $this->sanitizeOEmbed($data['oembed_data']['oembed']);
-        
+
         if(array_key_exists('thumbnail', $data['tag']['params']['plugin'])){
             if($oembed['thumbnail_url']){
                 $img = '<img src="'.$oembed['thumbnail_url'].'" alt="'.$oembed['title'].'" title="'.$oembed['title'].'" height="'.$oembed['thumbnail_height'].'px" width="'.$oembed['thumbnail_width'].'px"/>';
@@ -341,7 +346,7 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
                 case 'photo':
                     if($this->getConf('fullwidth_images')){
                         $content = '<img src="'.$oembed['url'].'" alt="'.$oembed['title'].'" title="'.$oembed['title'].'" width=100% />';
-                    } else { 
+                    } else {
                         $content = '<img src="'.$oembed['url'].'" alt="'.$oembed['title'].'" title="'.$oembed['title'].'" height="'.$oembed['height'].'px" width="'.$oembed['width'].'px"/>';
                     }
                     break;
@@ -549,7 +554,7 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
                 $retarray[$key] = htmlspecialchars($value);
             }
         }
-        
+
         return $retarray;
     }
 
@@ -595,4 +600,3 @@ class syntax_plugin_oembed extends DokuWiki_Syntax_Plugin {
         }
     }
 }
-

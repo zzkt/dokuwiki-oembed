@@ -1,8 +1,7 @@
 base   oembed
-author Dwayne Bent, nik gaffney
+author nik gaffney
 email  nik@fo.am
-date   2020-06-03
+date   2025-05-25
 name   oembed plugin
 desc   Embed media from oEmbed providers
-url    https://github.com/zzkt/dokuwiki-oembed/zipball/master
-
+url    https://codeberg.org/zzkt/dokuwiki-oembed
